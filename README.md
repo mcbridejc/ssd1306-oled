@@ -2,6 +2,10 @@
 
 A C++ ESP-IDK component for controlling a SSD1306 OLED display. This is based on the [arduino driver provided by Heltec](https://github.com/HelTecAutomation/Heltec_ESP32), which appears to be based on drivers created by [Thing Pulse](https://thingpulse.com), whose products you should check out, if for no other reason, because they appear to have done most of the heavy lifting for this display driver and released it open source.
 
+## API Documentation
+
+See [this thing pulse github page](https://github.com/ThingPulse/esp8266-oled-ssd1306) for better documenation of the API. THis driver is essentially the same, just adapted to work with the ESP-IDK libraries instead of Arduino.
+
 ## Example
 
 A simple example:
