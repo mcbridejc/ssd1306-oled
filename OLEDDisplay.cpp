@@ -127,7 +127,7 @@ void OLEDDisplay::setPixel(int16_t x, int16_t y) {
   }
 }
 
-void OLEDDisplay::drawString(int16_t xMove, int16_t yMove, char *text) {
+void OLEDDisplay::drawString(int16_t xMove, int16_t yMove, const char *text) {
   uint16_t lineHeight = fontData[HEIGHT_POS];
 
   uint16_t yOffset = 0;
@@ -144,15 +144,18 @@ void OLEDDisplay::drawString(int16_t xMove, int16_t yMove, char *text) {
   }
 
   uint16_t line = 0;
-  char* textPart = strtok(text,"\n");
+  char *copy = strndup(text, 256);
+  char *saveptr;
+  char* textPart = strtok_r(copy, "\n", &saveptr);
   while (textPart != NULL) {
     uint16_t length = strlen(textPart);
     drawStringInternal(xMove, yMove - yOffset + (line++) * lineHeight, textPart, length, getStringWidth(textPart, length));
-    textPart = strtok(NULL, "\n");
+    textPart = strtok_r(NULL, "\n", &saveptr);
   }
+  free(copy);
 }
 
-void OLEDDisplay::drawStringMaxWidth(int16_t xMove, int16_t yMove, uint16_t maxLineWidth, char* text) {
+void OLEDDisplay::drawStringMaxWidth(int16_t xMove, int16_t yMove, uint16_t maxLineWidth, const char* text) {
   uint16_t firstChar  = fontData[FIRST_CHAR_POS];
   uint16_t lineHeight = fontData[HEIGHT_POS];
 
@@ -482,7 +485,7 @@ void OLEDDisplay::drawXbm(int16_t xMove, int16_t yMove, int16_t width, int16_t h
   }
 }
 
-void OLEDDisplay::drawStringInternal(int16_t xMove, int16_t yMove, char* text, uint16_t textLength, uint16_t textWidth) {
+void OLEDDisplay::drawStringInternal(int16_t xMove, int16_t yMove, const char* text, uint16_t textLength, uint16_t textWidth) {
   uint8_t textHeight       = fontData[HEIGHT_POS];
   uint8_t firstChar        = fontData[FIRST_CHAR_POS];
   uint16_t sizeOfJumpTable = fontData[CHAR_NUM_POS] * JUMPTABLE_BYTES;

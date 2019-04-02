@@ -184,12 +184,12 @@ class OLEDDisplay {
     /* Text functions */
 
     // Draws a string at the given location
-    void drawString(int16_t x, int16_t y, char *text);
+    void drawString(int16_t x, int16_t y, const char *text);
 
     // Draws a String with a maximum width at the given location.
     // If the given String is wider than the specified width
     // The text will be wrapped to the next line at a space or dash
-    void drawStringMaxWidth(int16_t x, int16_t y, uint16_t maxLineWidth, char *text);
+    void drawStringMaxWidth(int16_t x, int16_t y, uint16_t maxLineWidth, const char *text);
 
     // Returns the width of the const char* with the current
     // font settings
@@ -302,7 +302,7 @@ class OLEDDisplay {
 
     void inline drawInternal(int16_t xMove, int16_t yMove, int16_t width, int16_t height, const uint8_t *data, uint16_t offset, uint16_t bytesInData) __attribute__((always_inline));
 
-    void drawStringInternal(int16_t xMove, int16_t yMove, char* text, uint16_t textLength, uint16_t textWidth);
+    void drawStringInternal(int16_t xMove, int16_t yMove, const char* text, uint16_t textLength, uint16_t textWidth);
 
     // UTF-8 to font table index converter
     // Code form http://playground.arduino.cc/Main/Utf8ascii
