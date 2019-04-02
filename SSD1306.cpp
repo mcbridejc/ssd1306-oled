@@ -122,7 +122,7 @@ void SSD1306::display() {
         if (k == 16)  {
             i2c_master_stop(handle);
             i2c_master_cmd_begin(I2C_NUM_0, handle, ticks_to_wait);
-            free(handle);
+            i2c_cmd_link_delete(handle);
             k = 0;
         }
         }
@@ -131,7 +131,7 @@ void SSD1306::display() {
     if (k != 0) {
         i2c_master_stop(handle);
         i2c_master_cmd_begin(I2C_NUM_0, handle, ticks_to_wait);
-        free(handle);
+        i2c_cmd_link_delete(handle);
     }
     
 #else
